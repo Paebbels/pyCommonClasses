@@ -18,6 +18,11 @@
 A collection of common classes for Python
 
 
+## Classes
+* `Version`  
+  Representation of a version number.
+
+
 ## Contributors
 
 * [Patrick Lehmann](https://github.com/Paebbels) (Maintainer)

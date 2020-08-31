@@ -1,1 +1,3 @@
+py-flags>=1.1.4
+
 pyMetaClasses>=1.2.0
