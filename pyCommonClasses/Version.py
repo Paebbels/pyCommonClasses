@@ -57,27 +57,36 @@ class Version(metaclass=Overloading):
 		Dirty = 2
 
 	parts   : Parts
-	flags   : int
-	major   : int
-	minor   : int
-	patch   : int
-	build   : int
-	pre     : int
-	post    : int
-	prefix  : str
-	postfix : str
-	ahead   : int
+	flags   : int = Flags.Clean
+	major   : int = 0
+	minor   : int = 0
+	patch   : int = 0
+	build   : int = 0
+	pre     : int = 0
+	post    : int = 0
+	prefix  : str = ""
+	postfix : str = ""
+	ahead   : int = 0
 
 	def __init__(self, versionString : str):
-		if versionString.startswith(("V", "v", "I", "i", "R", "r")):
+		if versionString == "":
+			raise ValueError("Parameter 'versionString' is empty.")
+		elif versionString is None:
+			raise ValueError("Parameter 'versionString' is None.")
+		elif versionString.startswith(("V", "v", "I", "i", "R", "r")):
 			versionString = versionString[1:]
 		elif versionString.startswith(("rev", "REV")):
 			versionString = versionString[3:]
 
 		split = versionString.split(".")
+		length = len(split)
 		self.major = int(split[0])
-		self.minor = int(split[1])
-		self.patch = int(split[2])
+		if length >= 2:
+			self.minor = int(split[1])
+		if length >= 3:
+			self.patch = int(split[2])
+		if length >= 4:
+			self.build = int(split[3])
 		self.flags = self.Flags.Clean
 
 	def __init__(self, major : int, minor : int, patch : int = 0, build : int = 0):

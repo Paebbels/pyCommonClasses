@@ -11,7 +11,7 @@
 # =============================================================================
 # Authors:            Patrick Lehmann
 #
-# Python package:     A collection of common classes for Python
+# Python unittest:    Helper functions for unittests
 #
 # Description:
 # ------------------------------------
@@ -36,60 +36,10 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
-import setuptools
+"""
+pyCommonClasses
+###############
 
-with open("README.md", "r") as file:
-	long_description = file.read()
-
-requirements = []
-with open("requirements.txt") as file:
-	for line in file.readlines():
-		requirements.append(line)
-
-projectName = "pyCommonClasses"
-
-github_url =  "https://github.com/Paebbels/" + projectName
-rtd_url =     "https://" + projectName + ".readthedocs.io/en/latest/"
-
-setuptools.setup(
-	name=projectName,
-	version="0.1.2",
-
-	author="Patrick Lehmann",
-	author_email="Paebbels@gmail.com",
-	# maintainer="Patrick Lehmann",
-	# maintainer_email="Paebbels@gmail.com",
-
-	description="A collection of common classes for Python.",
-	long_description=long_description,
-	long_description_content_type="text/markdown",
-
-	url=github_url,
-	project_urls={
-		'Documentation': rtd_url,
-		'Source Code':   github_url,
-		'Issue Tracker': github_url + "/issues"
-	},
-	# download_url="",
-
-	packages=setuptools.find_packages(),
-	classifiers=[
-		"License :: OSI Approved :: Apache Software License",
-		"Operating System :: OS Independent",
-		"Programming Language :: Python :: 3 :: Only",
-		"Programming Language :: Python :: 3.4",
-		"Programming Language :: Python :: 3.5",
-		"Programming Language :: Python :: 3.6",
-		"Programming Language :: Python :: 3.7",
-		"Programming Language :: Python :: 3.8",
-		"Development Status :: 5 - Production/Stable",
-		"Intended Audience :: Developers",
-		"Topic :: Utilities"
-	],
-	keywords="Python3 Class Collection",
-
-	python_requires='>=3.4',
-	install_requires=requirements,
-	# provides=
-	# obsoletes=
-)
+:copyright: Copyright 2020-2020 Patrick Lehmann - Bötzingen, Germany
+:license: Apache License, Version 2.0
+"""

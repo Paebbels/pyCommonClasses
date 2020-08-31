@@ -11,7 +11,7 @@
 # =============================================================================
 # Authors:            Patrick Lehmann
 #
-# Python package:     A collection of common classes for Python
+# Python unittest:    Testing the Version module
 #
 # Description:
 # ------------------------------------
@@ -36,60 +36,51 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============================================================================
 #
-import setuptools
+"""
+pyAttributes
+############
 
-with open("README.md", "r") as file:
-	long_description = file.read()
+:copyright: Copyright 2020-2020 Patrick Lehmann - Bötzingen, Germany
+:license: Apache License, Version 2.0
+"""
+from unittest     import TestCase
 
-requirements = []
-with open("requirements.txt") as file:
-	for line in file.readlines():
-		requirements.append(line)
+from pyCommonClasses.Version import Version as UUT
 
-projectName = "pyCommonClasses"
 
-github_url =  "https://github.com/Paebbels/" + projectName
-rtd_url =     "https://" + projectName + ".readthedocs.io/en/latest/"
+if __name__ == "__main__":
+	print("ERROR: you called a testcase declaration file as an executable module.")
+	print("Use: 'python -m unitest <testcase module>'")
+	exit(1)
 
-setuptools.setup(
-	name=projectName,
-	version="0.1.2",
 
-	author="Patrick Lehmann",
-	author_email="Paebbels@gmail.com",
-	# maintainer="Patrick Lehmann",
-	# maintainer_email="Paebbels@gmail.com",
+class Version(TestCase):
+	version : UUT
 
-	description="A collection of common classes for Python.",
-	long_description=long_description,
-	long_description_content_type="text/markdown",
+	# def test_CreateFromNone(self):
+	# 	with self.assertRaises(ValueError):
+	# 		version = Version(versionString=None)
 
-	url=github_url,
-	project_urls={
-		'Documentation': rtd_url,
-		'Source Code':   github_url,
-		'Issue Tracker': github_url + "/issues"
-	},
-	# download_url="",
+	def test_CreateFromEmptyString(self):
+		with self.assertRaises(ValueError):
+			version = Version("")
 
-	packages=setuptools.find_packages(),
-	classifiers=[
-		"License :: OSI Approved :: Apache Software License",
-		"Operating System :: OS Independent",
-		"Programming Language :: Python :: 3 :: Only",
-		"Programming Language :: Python :: 3.4",
-		"Programming Language :: Python :: 3.5",
-		"Programming Language :: Python :: 3.6",
-		"Programming Language :: Python :: 3.7",
-		"Programming Language :: Python :: 3.8",
-		"Development Status :: 5 - Production/Stable",
-		"Intended Audience :: Developers",
-		"Topic :: Utilities"
-	],
-	keywords="Python3 Class Collection",
+	def test_CreateFromSomeString(self):
+		with self.assertRaises(ValueError):
+			version = Version("None")
 
-	python_requires='>=3.4',
-	install_requires=requirements,
-	# provides=
-	# obsoletes=
-)
+	def test_CreateFromString1(self):
+		version = UUT("0.0.0")
+
+		self.assertEqual(version.major, 0, "Major number is not 0.")
+		self.assertEqual(version.minor, 0, "Minor number is not 0.")
+		self.assertEqual(version.patch, 0, "Patch number is not 0.")
+		self.assertEqual(version.build, 0, "Build number is not 0.")
+
+	def test_CreateFromIntegers1(self):
+		version = UUT(0, 0, 0)
+
+		self.assertEqual(version.major, 0, "Major number is not 0.")
+		self.assertEqual(version.minor, 0, "Minor number is not 0.")
+		self.assertEqual(version.patch, 0, "Patch number is not 0.")
+		self.assertEqual(version.build, 0, "Build number is not 0.")

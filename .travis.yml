@@ -1,12 +1,25 @@
 language: python
+python:
+  - 3.8
 
 install:
-  - pip3 install -U -r requirements.txt
+  - pip3 install -U -r tests/requirements.txt
 
 # if: tag IS present
 
 script:
-  - echo "Nothing to do."
+  - echo "branch=" $TRAVIS_BRANCH "hash=" $TRAVIS_COMMIT
+  - echo "Python Code Coverage"
+  - echo "========================================"
+  - coverage run --append -m unittest tests.unit.Version
+  - coverage report
+  - coverage xml
+  - python-codacy-coverage -r coverage.xml
+  - codecov
+  - echo "Python Unit Tests"
+  - echo "========================================"
+  - python -m unittest tests.unit.Version
+
 
 deploy:
   provider: pypi
