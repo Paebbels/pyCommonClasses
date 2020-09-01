@@ -5,21 +5,14 @@ python:
 install:
   - pip3 install -U -r tests/requirements.txt
 
-# if: tag IS present
-
 script:
-  - echo "branch=" $TRAVIS_BRANCH "hash=" $TRAVIS_COMMIT
-  - echo "Python Code Coverage"
-  - echo "========================================"
+  - echo "Python Code Coverage\n================================================================================"
   - coverage run --append -m unittest tests.unit.Version
-  - coverage report
-  - coverage xml
-  - python-codacy-coverage -r coverage.xml
-  - codecov
-  - echo "Python Unit Tests"
-  - echo "========================================"
+  - coverage report && coverage xml
+  - echo "Upload coverage results to Codacy..."  && python-codacy-coverage -r coverage.xml
+  - echo "Upload coverage results to CodeCov..." && codecov
+  - echo "Python Unit Tests\n================================================================================"
   - python -m unittest tests.unit.Version
-
 
 deploy:
   provider: pypi
