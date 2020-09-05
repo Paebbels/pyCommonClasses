@@ -63,11 +63,11 @@ class Version(TestCase):
 
 	def test_CreateFromEmptyString(self):
 		with self.assertRaises(ValueError):
-			version = Version("")
+			Version("")
 
 	def test_CreateFromSomeString(self):
 		with self.assertRaises(ValueError):
-			version = Version("None")
+			Version("None")
 
 	def test_CreateFromString1(self):
 		version = UUT("0.0.0")
