@@ -7,8 +7,14 @@ __pycache__/
 coverage.xml
 /.cov
 
+# setuptools
+/build
+/dist
+/*.egg-info
+
 # Sphinx documentation
 doc/_build
 
 # PyCharm project
 /.idea/workspace.xml
+/.idea/shelf/
