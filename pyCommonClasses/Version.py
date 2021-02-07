@@ -1,6 +1,3 @@
-# EMACS settings: -*-  tab-width: 2; indent-tabs-mode: t -*-
-# vim: tabstop=2:shiftwidth=2:noexpandtab
-# kate: tab-width 2; replace-tabs off; indent-width 2;
 # =============================================================================
 #                ____                                       ____ _
 #   _ __  _   _ / ___|___  _ __ ___  _ __ ___   ___  _ __  / ___| | __ _ ___ ___  ___  ___
@@ -19,7 +16,7 @@
 #
 # License:
 # ============================================================================
-# Copyright 2020-2020 Patrick Lehmann - Bötzingen, Germany
+# Copyright 2020-2021 Patrick Lehmann - Bötzingen, Germany
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -95,6 +92,55 @@ class Version(metaclass=Overloading):
 		self.patch = patch
 		self.build = build
 		self.flags = self.Flags.Clean
+
+	def __eq__(self, other: 'Version'):
+		return (
+			(self.major == other.major) and
+			(self.minor == other.minor) and
+			(self.patch == other.patch) and
+			(self.build == other.build)
+		)
+
+	def __ne__(self, other):
+		return not self.__eq__(other)
+
+	@staticmethod
+	def __compare(left: 'Version', right: 'Version') -> bool:
+		if (left.major < right.major):  return True
+		if (left.major > right.major):  return False
+
+		if (left.minor < right.minor):  return True
+		if (left.minor > right.minor):  return False
+
+		if (left.patch < right.patch):  return True
+		if (left.patch > right.patch):  return False
+
+		if (left.build < right.build):  return True
+		if (left.build > right.build):  return False
+
+		return None
+
+	def __lt__(self, other):
+		result = self.__compare(self, other)
+
+		if result is not None:
+			return result
+		else:
+			return False
+
+	def __le__(self, other):
+		result = self.__compare(self, other)
+
+		if result is not None:
+			return result
+		else:
+			return True
+
+	def __gt__(self, other):
+		return not self.__le__(other)
+
+	def __ge__(self, other):
+		return not self.__lt__(other)
 
 	def __str__(self):
 		return "v{0}.{1}.{2}".format(self.major, self.minor, self.patch)
